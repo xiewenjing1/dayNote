@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 数组映射为对象
+        const list = [1, 2, 3, 4];
+        const Obj = list.map(item => {
+            return {id: item};
+        });
+        // [{id: 1},{id: 2},{id: 3},{id: 4}]
+        // console.log(Obj);
+
+        // 一个对象拼合为新对象
+        let list1 = [
+            {
+                id: 1,
+                value: 10
+            },
+            {
+                id: 2,
+                value: 14
+            },
+            {
+                id: 3,
+                value: 13
+            },
+            {
+                id: 4,
+                value: 12
+            }
+
+        ];
+        list1 = list1.map(item => {
+                return {
+                    xuhao: item.id,
+                    jiage: item.value
+                }
+        });
+        // {xuhao: 1, jiage: 10}, {xuhao: 2, jiage: 14}, {xuhao: 3, jiage: 13}, {xuhao: 4, jiage: 12}
+        // console.log(list1);
+        
+        // 3请求来的数据所有的随机组合为新的对象。
+        const list3 = [
+            {
+                id: 1,
+                value: 'aa'
+            },
+            {
+                id: 2,
+                value: 'bb'
+            },
+            {
+                id: 3,
+                value: 'cc'
+            },
+            {
+                id: 4,
+                value: 'dd'
+            }
+        ];
+        const list4 = [
+            {
+                jiaQian: 'aa',
+                start: [
+                        {id:1, start: 'start1'},
+                        {id:2, start: 'start1-1'},
+                        {id:3, start: 'start1-2'},
+                        {id:4, start: 'start1-3'}
+                ] 
+            },
+            {
+                jiaQian: 'cc',
+                start:[
+                        {id:1, start: 'start2'},
+                        {id:2, start: 'start2-1'},
+                        {id:3, start: 'start2-2'},
+                        {id:4, start: 'start2-3'}
+                ] 
+            },
+            {
+                jiaQian: 'dd',
+                start:[
+                        {id:1, start: 'start3'},
+                        {id:2, start: 'start3-1'},
+                        {id:3, start: 'start3-2'},
+                        {id:4, start: 'start3-3'}
+                ]
+            }
+        ];
+
+        const newList = list4.map(item => {
+            const obj = {};
+            obj['jiaQian'] = item.jiaQian;
+            obj['id'] = list3.filter(element => element.value === item.jiaQian)[0].id;
+            obj['start'] = item.start.filter(item => obj['id'] === item.id)[0].start;
+            return obj;
+        });
+        console.log(newList);
+    </script>
+</body>
+</html>
